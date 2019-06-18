@@ -2,7 +2,6 @@ import random
 
 import arcade
 
-# Constants
 RESOURCES_ROOT = "../resources/"
 ORIGINAL_TILE_SIZE = 128
 TILE_SCALING = 0.5
@@ -137,7 +136,6 @@ class SnakeHead(arcade.Sprite):
 class SnakeGame(arcade.Window):
 
     def __init__(self):
-        # Call the parent class and set up the window
         super().__init__(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_TITLE)
         self.set_update_rate(1.0)
 
@@ -180,7 +178,8 @@ class SnakeGame(arcade.Window):
             self.snake.draw()
             self.food.draw()
 
-    def draw_game_over(self):
+    @staticmethod
+    def draw_game_over():
         arcade.draw_text("Game Over", TILE_SIZE, SCREEN_HEIGHT / 2, arcade.color.WHITE, 54)
 
     def on_key_press(self, key, modifiers):
