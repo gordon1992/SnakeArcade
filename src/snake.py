@@ -72,6 +72,13 @@ class Snake:
                 return True
         return False
 
+    def is_off_screen(self):
+        if self.head.left < 0 or self.head.left >= SCREEN_WIDTH:
+            return True
+        if self.head.bottom < 0 or self.head.bottom >= SCREEN_HEIGHT:
+            return True
+        return False
+
     def set_moving_up(self):
         self.moving_up = True
         self.moving_down = False
@@ -165,10 +172,16 @@ class SnakeGame(arcade.Window):
         self.food.bottom = y
 
     def on_draw(self):
-        self.wall_list.draw()
         self.snake.move()
-        self.snake.draw()
-        self.food.draw()
+        self.wall_list.draw()
+        if self.snake.is_off_screen():
+            self.draw_game_over()
+        else:
+            self.snake.draw()
+            self.food.draw()
+
+    def draw_game_over(self):
+        arcade.draw_text("Game Over", TILE_SIZE, SCREEN_HEIGHT / 2, arcade.color.WHITE, 54)
 
     def on_key_press(self, key, modifiers):
         if (key == arcade.key.UP or key == arcade.key.W) and not self.snake.moving_down:
