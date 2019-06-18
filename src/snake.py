@@ -186,11 +186,11 @@ class SnakeGame(arcade.Window):
     def on_key_press(self, key, modifiers):
         if (key == arcade.key.UP or key == arcade.key.W) and not self.snake.moving_down:
             self.snake.set_moving_up()
-        elif key == arcade.key.DOWN or key == arcade.key.S:
+        elif (key == arcade.key.DOWN or key == arcade.key.S) and not self.snake.moving_up:
             self.snake.set_moving_down()
-        elif key == arcade.key.LEFT or key == arcade.key.A:
+        elif (key == arcade.key.LEFT or key == arcade.key.A) and not self.snake.moving_right:
             self.snake.set_moving_left()
-        elif key == arcade.key.RIGHT or key == arcade.key.D:
+        elif (key == arcade.key.RIGHT or key == arcade.key.D) and not self.snake.moving_left:
             self.snake.set_moving_right()
 
 
