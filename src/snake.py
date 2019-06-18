@@ -172,6 +172,8 @@ class SnakeGame(arcade.Window):
     def on_draw(self):
         self.snake.move()
         self.wall_list.draw()
+        if self.snake.exists_at_coordinates(self.food.left, self.food.bottom):
+            self.setup_food()
         if self.snake.is_off_screen():
             self.draw_game_over()
         else:
