@@ -142,11 +142,13 @@ class SnakeGame(arcade.Window):
         self.wall_list = None
         self.snake = None
         self.food = None
+        self.score = 0
 
     def setup(self):
         self.wall_list = arcade.SpriteList()
         self.snake = Snake()
         self.food = Food()
+        self.score = 0
 
         self.setup_wall()
         self.snake.setup()
@@ -174,11 +176,14 @@ class SnakeGame(arcade.Window):
         self.wall_list.draw()
         if self.snake.exists_at_coordinates(self.food.left, self.food.bottom):
             self.setup_food()
+            self.score += 1
         if self.snake.is_off_screen():
             self.draw_game_over()
         else:
             self.snake.draw()
             self.food.draw()
+        score_text = f"Score: {self.score}"
+        arcade.draw_text(score_text, 10, 10, arcade.csscolor.WHITE, 18)
 
     @staticmethod
     def draw_game_over():
