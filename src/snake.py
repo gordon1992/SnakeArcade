@@ -78,28 +78,26 @@ class Snake:
             return True
         return False
 
-    def set_moving_up(self):
-        self.moving_up = True
+    def _reset_movement(self):
+        self.moving_up = False
         self.moving_down = False
         self.moving_left = False
         self.moving_right = False
+
+    def set_moving_up(self):
+        self._reset_movement()
+        self.moving_up = True
 
     def set_moving_down(self):
-        self.moving_up = False
+        self._reset_movement()
         self.moving_down = True
-        self.moving_left = False
-        self.moving_right = False
 
     def set_moving_left(self):
-        self.moving_up = False
-        self.moving_down = False
+        self._reset_movement()
         self.moving_left = True
-        self.moving_right = False
 
     def set_moving_right(self):
-        self.moving_up = False
-        self.moving_down = False
-        self.moving_left = False
+        self._reset_movement()
         self.moving_right = True
 
 
