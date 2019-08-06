@@ -1,0 +1,11 @@
+RESOURCES_ROOT = "../resources/"
+ORIGINAL_TILE_SIZE = 128
+TILE_SCALING = 0.5
+TILE_SIZE = int(ORIGINAL_TILE_SIZE * TILE_SCALING)
+SCREEN_WIDTH = TILE_SIZE * 11
+SCREEN_HEIGHT = TILE_SIZE * 11
+SCREEN_TITLE = "Snake"
+
+
+def get_texture(suffix):
+    return f"{RESOURCES_ROOT}{suffix}"
