@@ -63,6 +63,13 @@ class Snake:
             x = temp_x
             y = temp_y
 
+    def extend(self):
+        current_tail = self.body[len(self.body) - 1]
+        new_tail = SnakeBody()
+        new_tail.left = current_tail.left
+        new_tail.bottom = current_tail.bottom
+        self.body.append(new_tail)
+
     def exists_at_coordinates(self, x, y):
         if self.head.left == x and self.head.bottom == y:
             return True
@@ -178,6 +185,7 @@ class SnakeGame(arcade.Window):
         if self.snake.exists_at_coordinates(self.food.left, self.food.bottom):
             self.setup_food()
             self.score += 1
+            self.snake.extend()
         if self.snake.is_off_screen():
             self.draw_game_over()
         else:
