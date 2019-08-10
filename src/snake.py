@@ -42,12 +42,16 @@ class Snake:
         y = self.head.bottom
         if self.moving_up:
             self.head.bottom += TILE_SIZE
+            self.head.set_texture_up()
         elif self.moving_down:
             self.head.bottom -= TILE_SIZE
+            self.head.set_texture_down()
         elif self.moving_left:
             self.head.left -= TILE_SIZE
+            self.head.set_texture_left()
         elif self.moving_right:
             self.head.left += TILE_SIZE
+            self.head.set_texture_right()
         for body in self.body:
             temp_x = body.left
             temp_y = body.bottom
