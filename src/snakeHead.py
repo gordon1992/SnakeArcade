@@ -1,13 +1,10 @@
 import arcade
 
 from helpers import get_texture
+from snakeSprite import SnakeSprite
 
 
-class SnakeHead(arcade.Sprite):
-    TEXTURE_UP = 0
-    TEXTURE_DOWN = 1
-    TEXTURE_LEFT = 2
-    TEXTURE_RIGHT = 3
+class SnakeHead(SnakeSprite):
 
     def __init__(self):
         super().__init__()
@@ -22,15 +19,3 @@ class SnakeHead(arcade.Sprite):
         self.append_texture(right_texture)
 
         self.set_texture(self.TEXTURE_UP)
-
-    def set_texture_up(self):
-        self.set_texture(self.TEXTURE_UP)
-
-    def set_texture_down(self):
-        self.set_texture(self.TEXTURE_DOWN)
-
-    def set_texture_left(self):
-        self.set_texture(self.TEXTURE_LEFT)
-
-    def set_texture_right(self):
-        self.set_texture(self.TEXTURE_RIGHT)

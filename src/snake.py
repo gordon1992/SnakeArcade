@@ -3,6 +3,7 @@ import arcade
 from helpers import TILE_SIZE, SCREEN_WIDTH, SCREEN_HEIGHT
 from snakeBody import SnakeBody
 from snakeHead import SnakeHead
+from snakeSprite import set_sprite_texture
 
 
 class Snake:
@@ -53,16 +54,20 @@ class Snake:
             self.head.left += TILE_SIZE
             self.head.set_texture_right()
         for body in self.body:
-            temp_x = body.left
-            temp_y = body.bottom
+            current_x = body.left
+            current_y = body.bottom
+            set_sprite_texture(body, current_x, current_y, x, y)
             body.left = x
             body.bottom = y
-            x = temp_x
-            y = temp_y
+            x = current_x
+            y = current_y
 
     def extend(self):
+        body_before_current_tail = self.body[len(self.body) - 2]
         current_tail = self.body[len(self.body) - 1]
         new_tail = SnakeBody()
+        set_sprite_texture(new_tail, current_tail.left, current_tail.bottom,
+                           body_before_current_tail.left, body_before_current_tail.bottom)
         new_tail.left = current_tail.left
         new_tail.bottom = current_tail.bottom
         self.body.append(new_tail)
