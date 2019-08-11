@@ -17,14 +17,14 @@ class SnakeGame(arcade.Window):
         self.snake = None
         self.food = None
         self.score = 0
-        self.shouldWaitUntilNextRedraw = False
+        self.should_wait_until_next_redraw = False
 
     def setup(self):
         self.wall_list = arcade.SpriteList()
         self.snake = Snake()
         self.food = Food()
         self.score = 0
-        self.shouldWaitUntilNextRedraw = False
+        self.should_wait_until_next_redraw = False
 
         self.setup_wall()
         self.snake.setup()
@@ -48,7 +48,7 @@ class SnakeGame(arcade.Window):
         self.food.bottom = y
 
     def on_draw(self):
-        self.shouldWaitUntilNextRedraw = False
+        self.should_wait_until_next_redraw = False
         self.snake.move()
         self.wall_list.draw()
         if self.snake.exists_at_coordinates(self.food.left, self.food.bottom):
@@ -70,10 +70,10 @@ class SnakeGame(arcade.Window):
     def on_key_press(self, key, modifiers):
         # If multiple key presses handled between redraws, there is a risk that the snake can do
         # a 180 degree turn on the spot thus moving over itself. This flag prevents this.
-        if self.shouldWaitUntilNextRedraw:
+        if self.should_wait_until_next_redraw:
             return
         else:
-            self.shouldWaitUntilNextRedraw = True
+            self.should_wait_until_next_redraw = True
         if (key == arcade.key.UP or key == arcade.key.W) and not self.snake.moving_down:
             self.snake.set_moving_up()
         elif (key == arcade.key.DOWN or key == arcade.key.S) and not self.snake.moving_up:
