@@ -18,6 +18,7 @@ class SnakeGame(arcade.Window):
         self.food = None
         self.score = 0
         self.should_wait_until_next_redraw = False
+        self.game_over = False
 
     def setup(self):
         self.wall_list = arcade.SpriteList()
@@ -25,6 +26,7 @@ class SnakeGame(arcade.Window):
         self.food = Food()
         self.score = 0
         self.should_wait_until_next_redraw = False
+        self.game_over = False
 
         self.setup_wall()
         self.snake.setup()
@@ -48,6 +50,7 @@ class SnakeGame(arcade.Window):
         self.food.bottom = y
 
     def on_draw(self):
+        self.game_over = self.game_over or self.snake.is_off_screen() or self.snake.has_collided_with_self()
         self.should_wait_until_next_redraw = False
         self.snake.move()
         self.wall_list.draw()
@@ -55,7 +58,7 @@ class SnakeGame(arcade.Window):
             self.setup_food()
             self.score += 1
             self.snake.extend()
-        if self.snake.is_off_screen() or self.snake.has_collided_with_self():
+        if self.game_over:
             self.draw_game_over()
         else:
             self.snake.draw()
