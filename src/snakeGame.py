@@ -11,7 +11,7 @@ class SnakeGame(arcade.Window):
 
     def __init__(self):
         super().__init__(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_TITLE)
-        self.set_update_rate(1.0)
+        self.set_update_rate(0.25)
 
         self.wall_list = None
         self.snake = None
@@ -55,7 +55,7 @@ class SnakeGame(arcade.Window):
             self.setup_food()
             self.score += 1
             self.snake.extend()
-        if self.snake.is_off_screen():
+        if self.snake.is_off_screen() or self.snake.has_collided_with_self():
             self.draw_game_over()
         else:
             self.snake.draw()

@@ -72,13 +72,17 @@ class Snake:
         new_tail.bottom = current_tail.bottom
         self.body.append(new_tail)
 
-    def exists_at_coordinates(self, x, y):
-        if self.head.left == x and self.head.bottom == y:
-            return True
+    def _head_exists_at_coordinates(self, x, y):
+        return self.head.left == x and self.head.bottom == y
+
+    def _body_exists_at_coordinates(self, x, y):
         for body in self.body:
             if body.left == x and body.bottom == y:
                 return True
         return False
+
+    def exists_at_coordinates(self, x, y):
+        return self._head_exists_at_coordinates(x, y) or self._body_exists_at_coordinates(x, y)
 
     def is_off_screen(self):
         if self.head.left < 0 or self.head.left >= SCREEN_WIDTH:
@@ -86,6 +90,9 @@ class Snake:
         if self.head.bottom < 0 or self.head.bottom >= SCREEN_HEIGHT:
             return True
         return False
+
+    def has_collided_with_self(self):
+        return self._body_exists_at_coordinates(self.head.left, self.head.bottom)
 
     def _reset_movement(self):
         self.moving_up = False
